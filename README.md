@@ -4,7 +4,7 @@
 
 ---
 
-# APK Analyzer AI — Reverse Engineering Toolkit
+# AI-Assisted Reverse Engineering: A Practical Case Study in APK Analysis
 
 A practical, research-focused project demonstrating how **AI can support Reverse Engineering** to detect malicious Android applications — a real, ongoing cybersecurity challenge where harmful APKs continue to slip into the Google Play Store despite automated checks.
 
