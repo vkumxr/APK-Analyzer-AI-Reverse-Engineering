@@ -122,3 +122,7 @@ python -m analyzers.static_analyzer sample.apk --out-json report.json
 ```bash
 python -m analyzers.static_analyzer sample.apk --jadx --out-json report.json
 ```
+
+Next comes the 𝗔𝗜 𝗲𝗻𝗴𝗶𝗻𝗲 — capable of interpreting these signals, spotting suspicious patterns, explaining risks, and supporting analysts with actionable insights.
+
+Future work includes a web dashboard and dynamic analysis using Frida to reveal behaviors that static methods miss.
