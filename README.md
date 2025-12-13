@@ -5,124 +5,102 @@
 ---
 
 # 🧠 ReDroid-AI  
-### **AI-Powered Reverse Engineering — From Static Signals to Intelligent Understanding**
+### **AI-Assisted Reverse Engineering — From Static Signals to Behavioral Verdicts**
 
-ReDroid-AI is a research-driven project aimed at building an **AI system capable of assisting with Reverse Engineering** across different software artifacts.  
-The project’s long-term mission is to create an AI that can **interpret structure, behavior, and intent inside binaries**, helping analysts understand complex software faster and more accurately.
+ReDroid-AI is a **research-driven reverse engineering system** designed to transform low-level software artifacts into **structured intelligence and security verdicts**.
 
-This repository currently includes **Phase 1: Static Signal Extraction**, demonstrated using APKs — but the design is meant to scale to **any binary format** (APKs, EXEs, ELF, firmware, etc.).
+The project demonstrates how **automation + heuristic analysis + AI-style reasoning** can assist analysts in understanding **what software does, how it behaves, and whether it is risky or malicious**.
 
-The extracted signals are converted into structured JSON for the upcoming **AI Reasoning Engine**.
+While APKs are currently used as a demonstration target, the architecture is intentionally **format-agnostic** and designed to extend to:
+- ELF / Linux binaries  
+- Windows executables  
+- firmware images  
+- unknown or obfuscated artifacts  
 
 ---
 
-# 🎯 Project Vision: What ReDroid-AI Ultimately Becomes
+## 🎯 Project Vision
 
 Traditional reverse engineering is:
+- manual
+- time-consuming
+- expertise-heavy
+- difficult to scale
 
-- slow  
-- complex  
-- dependent on manual expertise  
-- difficult to scale  
+**ReDroid-AI approaches the problem differently:**
 
-**ReDroid-AI aims to change that.**
+> **Extract signals → correlate risks → reason about intent → assist the analyst**
 
-The idea is simple:
-
-> **Let automated analysis extract signals → Let AI reason about them → Let humans get clarity.**
-
-ReDroid-AI will evolve into an AI system that can:
-
-- identify suspicious patterns  
-- explain code behavior  
-- summarize internal logic  
-- classify risk levels  
-- highlight anomalies  
-- support malware detection  
-- assist with general reverse-engineering tasks  
-
-APK analysis is just the **first demonstration**, not the project’s limitation.
+The goal is **not to replace analysts**, but to:
+- accelerate triage
+- highlight high-risk behaviors
+- explain *why* something is dangerous
+- guide deeper manual or dynamic analysis
 
 ---
 
-# 📦 Current Capabilities (Phase 1 – Static Signal Extraction)
-
-### ✔ General Static Analysis Framework  
-Extracts structural and behavioral indicators from software artifacts.
-
-### ✔ APK Demonstration Modules  
-(Current implementation uses APKs to showcase the system)
-
-- decode resources (apktool)  
-- optional decompilation (JADX)  
-- manifest parsing  
-- component and permission extraction  
-- string analysis (URLs, IPs, tokens, commands)  
-- recursive file scanning  
-- behavior keyword detection  
-- clean **JSON output for AI models**
-
----
-
-## 📁 Project Structure
+## 🧱 Architecture Overview
 
 ```text
-ReDroid-AI/
-├── analyzers/
-│   ├── static_analyzer.py
-│   └── __init__.py
-├── utils/
-│   ├── file_utils.py
-│   ├── manifest_parser.py
-│   ├── string_scanner.py
-│   └── __init__.py
-├── examples/
-│   └── sample.json
-├── pacman.apk       (demo sample)
-└── README.md
-```
-
----
-
-## 🧩 Architecture Overview
-
-```text
-Artifact (APK for demo)
+Artifact (APK demo)
       │
-      ├── Decode / Decompile (apktool / JADX)
+      ├── Phase 1: Static Signal Extraction
       │
-      ├── Manifest Parser
+      ├── Phase 2: Risk & Heuristic Analysis
       │
-      ├── String Scanner
+      ├── Phase 3: Verdict & Reasoning Engine
       │
-      ├── Static Analyzer
-      │
-      └── JSON Output → (Input for ReDroid-AI Reasoning Engine)
+      └── Phase 4: Dynamic Observation (Frida hooks)
 ```
 
----
+## ✅ Phase 1 — Static Signal Extraction
+Extracts raw structural and behavioral indicators from binaries (APK demo).
 
-# 🚀 Quick Start
+**Capabilities**
+- APK decoding (apktool)
+- Optional decompilation (JADX)
+- AndroidManifest parsing
+- Permission & component extraction
+- String scanning (URLs, IPs, tokens, commands)
+- Recursive file analysis
+- Behavior keyword detection
+- Clean structured JSON output
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/vkumxr/ReDroid-AI.git
-cd ReDroid-AI
-```
-### 2. Create & activate virtual environment
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-### 3. Run static analysis (demo)
-```bash
-python -m analyzers.static_analyzer sample.apk --out-json report.json
-```
-4. Enable JADX for deeper analysis
-```bash
-python -m analyzers.static_analyzer sample.apk --jadx --out-json report.json
-```
 
-Next comes the 𝗔𝗜 𝗲𝗻𝗴𝗶𝗻𝗲 — capable of interpreting these signals, spotting suspicious patterns, explaining risks, and supporting analysts with actionable insights.
+## ✅ Phase 2 — Risk & Abuse Analysis Engine
+Transforms static signals into security-relevant findings.
 
-Future work includes a web dashboard and dynamic analysis using Frida to reveal behaviors that static methods miss.
+**Capabilities**
+- Permission risk scoring
+- Exported component abuse detection
+- Dangerous permission combination detection:
+  - READ_SMS + RECEIVE_SMS → OTP theft
+  - READ_SMS + INTERNET → data exfiltration
+  - RECEIVE_BOOT_COMPLETED + INTERNET → persistent spyware
+  - ACCESSIBILITY_SERVICE + INTERNET → full device takeover
+- Deterministic, explainable rule-based analysis
+- Risk-enriched JSON output
+
+
+## ✅ Phase 3 — AI Reasoning & Verdict Engine
+Converts technical findings into human-readable intelligence.
+
+**Capabilities**
+- Malware likelihood classification
+- Confidence scoring
+- Natural-language behavior summaries
+- High-level verdict generation (BENIGN / SUSPICIOUS / MALICIOUS)
+- Analyst-oriented explanations
+- Actionable recommendations (block, inspect, dynamic analysis)
+
+
+## 🚧 Phase 4 — Dynamic Behavior Analysis (In Progress)
+Observes real runtime behavior using instrumentation.
+
+**Planned Capabilities**
+- Frida-based runtime hooking
+- SMS interception monitoring
+- Network exfiltration detection
+- Sensitive API call tracing
+- Runtime behavior correlation with static signals
+- Dynamic JSON event schema for AI reasoning
